@@ -1,0 +1,7 @@
+<div class="board">
+  <section>
+    <div class="container square" *ngFor="let square of game.board.squares">
+      <app-square [square]="square" border-blue> </app-square>
+    </div>
+  </section>
+</div>
