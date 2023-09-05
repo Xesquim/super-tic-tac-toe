@@ -1,6 +1,6 @@
 <div
   class="game-square"
-  [ngClass]="{ noClick: !game.gameIsRunning }"
+  [ngClass]="{ noClick: !gameIsRunning }"
   (click)="squareClick()"
 >
   <p>{{ square.value }}</p>

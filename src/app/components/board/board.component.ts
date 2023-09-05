@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Board } from 'src/app/models/board';
+import { Configuration } from 'src/app/models/configuration';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -7,6 +9,10 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent {
+  @Input() board: Board = new Board();
+  configuration: Configuration = new Configuration();
+  playerTurn: string = 'X';
+  gameIsRunning: boolean = true;
   constructor(private gameService: GameService) {}
 
   get game(): GameService {

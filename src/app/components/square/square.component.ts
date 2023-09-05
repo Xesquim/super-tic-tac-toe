@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Board } from 'src/app/models/board';
 import { Square } from 'src/app/models/square';
 import { GameService } from 'src/app/services/game.service';
 
@@ -8,7 +9,14 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./square.component.scss'],
 })
 export class SquareComponent {
+  @Input() board: Board = new Board();
   @Input() square: Square = new Square();
+  @Input() playerTurn: string = 'X';
+  @Output() playerTurnEmitter: EventEmitter<string> =
+    new EventEmitter<string>();
+  @Input() gameIsRunning: boolean = true;
+  @Output() gameIsRunningEmitter: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
   constructor(private gameService: GameService) {}
 
@@ -17,10 +25,13 @@ export class SquareComponent {
   }
 
   public squareClick(): void {
-    console.log('ALOU CLIQUEI E SOU O: ' + this.gameService.playerTurn);
-    if (!this.gameService.gameIsRunning || this.square.value) return;
+    if (!this.gameIsRunning || this.square.value) return;
 
-    this.square.value = this.gameService.playerTurn;
-    this.gameService.changePlayersTurn();
+    this.square.value = this.playerTurn;
+    this.gameIsRunningEmitter.emit(
+      this.gameService.changePlayersTurn(this.board)
+    );
+
+    this.playerTurnEmitter.emit(this.playerTurn == 'X' ? 'O' : 'X');
   }
 }

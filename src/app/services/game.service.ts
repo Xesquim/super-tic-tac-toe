@@ -6,29 +6,14 @@ import { Board } from '../models/board';
   providedIn: 'root',
 })
 export class GameService {
-  configuration: Configuration = new Configuration();
-  board: Board = new Board();
-  playerTurn: string;
-  gameIsRunning: boolean;
-
-  constructor() {
-    this.newGame();
-    this.playerTurn = this.configuration.playerStart;
-    this.gameIsRunning = true;
-  }
-
-  public changePlayersTurn(): void {
+  public changePlayersTurn(board: Board): boolean {
     if (
-      this.checkRows(this.board, 'row') ||
-      this.checkRows(this.board, 'col') ||
-      this.checkDiagonals()
+      this.checkRows(board, 'row') ||
+      this.checkRows(board, 'col') ||
+      this.checkDiagonals(board)
     )
-      this.gameIsRunning = false;
-    this.playerTurn == 'X' ? (this.playerTurn = 'O') : (this.playerTurn = 'X');
-  }
-
-  private newGame(): void {
-    this.board.squares = this.board.newGame();
+      return false;
+    return true;
   }
 
   private checkRows(board: Board, mode: string): boolean {
@@ -50,13 +35,13 @@ export class GameService {
     return false;
   }
 
-  private checkDiagonals(): boolean {
+  private checkDiagonals(board: Board): boolean {
     const timesRun = 2,
-      midSquare = this.board.squares[4].value;
+      midSquare = board.squares[4].value;
 
     for (let i = 0; i <= timesRun; i += 2) {
-      let upperCorner = this.board.squares[i].value,
-        lowerCorner = this.board.squares[8 - i].value;
+      let upperCorner = board.squares[i].value,
+        lowerCorner = board.squares[8 - i].value;
 
       if (midSquare && upperCorner && lowerCorner) {
         if (midSquare === upperCorner && upperCorner === lowerCorner)
