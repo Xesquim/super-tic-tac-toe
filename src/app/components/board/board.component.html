@@ -1,13 +1,15 @@
 <div class="board">
   <section>
-    <div class="container square" *ngFor="let square of board.squares">
+    <div
+      class="container square"
+      *ngFor="let square of board.squares; let i = index"
+    >
       <app-square
         [board]="board"
         [square]="square"
-        [playerTurn]="playerTurn"
-        (playerTurnEmitter)="playerTurn = $event"
-        [gameIsRunning]="gameIsRunning"
-        (gameIsRunningEmitter)="gameIsRunning = $event"
+        [squareIndex]="i"
+        [gameIsRunning]="board.gameIsRunning"
+        (gameIsRunningEmitter)="board.gameIsRunning = $event"
         border-blue
       >
       </app-square>

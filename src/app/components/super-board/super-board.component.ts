@@ -6,7 +6,7 @@ import { Board } from 'src/app/models/board';
   templateUrl: './super-board.component.html',
   styleUrls: ['./super-board.component.scss'],
 })
-export class SuperBoardComponent implements OnInit {
+export class SuperBoardComponent {
   superBoard: Board[] = [
     new Board(),
     new Board(),
@@ -19,6 +19,4 @@ export class SuperBoardComponent implements OnInit {
     new Board(),
   ];
   constructor() {}
-
-  ngOnInit() {}
 }

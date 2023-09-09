@@ -12,4 +12,6 @@ export class Board {
     new Square(),
     new Square(),
   ];
+  gameIsRunning: boolean = true;
+  index: number = 0;
 }

@@ -11,7 +11,7 @@ import { GameService } from 'src/app/services/game.service';
 export class SquareComponent {
   @Input() board: Board = new Board();
   @Input() square: Square = new Square();
-  @Input() playerTurn: string = 'X';
+  @Input() squareIndex: number = 0;
   @Output() playerTurnEmitter: EventEmitter<string> =
     new EventEmitter<string>();
   @Input() gameIsRunning: boolean = true;
@@ -27,11 +27,14 @@ export class SquareComponent {
   public squareClick(): void {
     if (!this.gameIsRunning || this.square.value) return;
 
-    this.square.value = this.playerTurn;
+    this.gameService.lastSquarePlayed = this.squareIndex;
+    this.square.value = this.gameService.playerTurn;
     this.gameIsRunningEmitter.emit(
       this.gameService.changePlayersTurn(this.board)
     );
 
-    this.playerTurnEmitter.emit(this.playerTurn == 'X' ? 'O' : 'X');
+    this.gameService.playerTurn == 'X'
+      ? (this.gameService.playerTurn = 'O')
+      : (this.gameService.playerTurn = 'X');
   }
 }

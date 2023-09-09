@@ -1,7 +1,7 @@
 <div class="super-board">
   <section>
-    <div class="board" *ngFor="let board of superBoard">
-      <app-board [board]="board" border-blue> Teste</app-board>
+    <div class="board" *ngFor="let board of superBoard; let i = index">
+      <app-board [board]="board" [index]="i" border-blue> Teste</app-board>
     </div>
   </section>
 </div>

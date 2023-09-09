@@ -6,6 +6,8 @@ import { Board } from '../models/board';
   providedIn: 'root',
 })
 export class GameService {
+  lastSquarePlayed: number | null = null;
+  playerTurn: 'X' | 'O' = 'X';
   public changePlayersTurn(board: Board): boolean {
     if (
       this.checkRows(board, 'row') ||

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Board } from 'src/app/models/board';
 import { Configuration } from 'src/app/models/configuration';
 import { GameService } from 'src/app/services/game.service';
@@ -8,12 +8,18 @@ import { GameService } from 'src/app/services/game.service';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
   @Input() board: Board = new Board();
+  @Input() index: number = 0;
+  @Output() indexSquarePlayed: EventEmitter<number> =
+    new EventEmitter<number>();
   configuration: Configuration = new Configuration();
-  playerTurn: string = 'X';
-  gameIsRunning: boolean = true;
+
   constructor(private gameService: GameService) {}
+
+  ngOnInit(): void {
+    this.board.index = this.index;
+  }
 
   get game(): GameService {
     return this.gameService;
