@@ -14,4 +14,5 @@ export class Board {
   ];
   gameIsRunning: boolean = true;
   index: number = 0;
+  winner: 'X' | 'O' | null = null;
 }

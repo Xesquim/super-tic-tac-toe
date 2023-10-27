@@ -1,7 +1,12 @@
 <div class="super-board">
   <section>
     <div class="board" *ngFor="let board of superBoard; let i = index">
-      <app-board [board]="board" [index]="i" border-blue> Teste</app-board>
+      <app-board
+        [board]="board"
+        [index]="i"
+        (verifyIfBoardIndexIsRunning)="verifyIfBoardIndexIsRunning($event)"
+        border-blue
+      ></app-board>
     </div>
   </section>
 </div>

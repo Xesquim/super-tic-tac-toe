@@ -17,6 +17,8 @@ export class SquareComponent {
   @Input() gameIsRunning: boolean = true;
   @Output() gameIsRunningEmitter: EventEmitter<boolean> =
     new EventEmitter<boolean>();
+  @Output() verifyIfBoardIndexIsRunning: EventEmitter<number> =
+    new EventEmitter<number>();
 
   constructor(private gameService: GameService) {}
 
@@ -28,11 +30,14 @@ export class SquareComponent {
     if (!this.gameIsRunning || this.square.value) return;
 
     this.gameService.lastSquarePlayed = this.squareIndex;
+    this.verifyIfBoardIndexIsRunning.emit(this.squareIndex);
     this.square.value = this.gameService.playerTurn;
     this.gameIsRunningEmitter.emit(
       this.gameService.changePlayersTurn(this.board)
     );
-
+    if (!this.board.gameIsRunning) {
+      this.board.winner = this.gameService.playerTurn;
+    }
     this.gameService.playerTurn == 'X'
       ? (this.gameService.playerTurn = 'O')
       : (this.gameService.playerTurn = 'X');

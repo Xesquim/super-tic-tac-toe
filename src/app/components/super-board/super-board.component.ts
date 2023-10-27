@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from 'src/app/models/board';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-super-board',
@@ -18,5 +19,11 @@ export class SuperBoardComponent {
     new Board(),
     new Board(),
   ];
-  constructor() {}
+  constructor(private gameService: GameService) {}
+
+  public verifyIfBoardIndexIsRunning(index: number) {
+    if (!this.superBoard[index].gameIsRunning) {
+      this.gameService.lastSquarePlayed = null;
+    }
+  }
 }

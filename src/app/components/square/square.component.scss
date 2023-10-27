@@ -1,9 +1,8 @@
-.game-square {
+.game {
   height: 98%;
   width: 98%;
   line-height: 0.85;
   cursor: pointer;
-  background-color: lightblue;
   border-radius: 15px;
   box-shadow: 0px 0px 10px;
   display: flex;
@@ -18,4 +17,12 @@ p {
   overflow: hidden;
   color: #606f7b;
   font-family: sans-serif;
+}
+
+.running {
+  background-color: lightblue;
+}
+
+.over {
+  background-color: rgba(0, 0, 0, 0.5);
 }

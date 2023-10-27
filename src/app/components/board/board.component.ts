@@ -11,7 +11,7 @@ import { GameService } from 'src/app/services/game.service';
 export class BoardComponent implements OnInit {
   @Input() board: Board = new Board();
   @Input() index: number = 0;
-  @Output() indexSquarePlayed: EventEmitter<number> =
+  @Output() verifyIfBoardIndexIsRunning: EventEmitter<number> =
     new EventEmitter<number>();
   configuration: Configuration = new Configuration();
 
@@ -23,5 +23,9 @@ export class BoardComponent implements OnInit {
 
   get game(): GameService {
     return this.gameService;
+  }
+
+  public emitBoardIndex(index: number) {
+    this.verifyIfBoardIndexIsRunning.emit(index);
   }
 }

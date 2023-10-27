@@ -1,9 +1,11 @@
 <div
-  class="game-square"
+  class="game"
   [ngClass]="{
     noClick:
       !gameIsRunning ||
-      (game.lastSquarePlayed != null && board.index != game.lastSquarePlayed)
+      (game.lastSquarePlayed != null && board.index != game.lastSquarePlayed),
+    running: gameIsRunning,
+    over: !gameIsRunning
   }"
   (click)="squareClick()"
 >
