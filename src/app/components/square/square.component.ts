@@ -30,11 +30,11 @@ export class SquareComponent {
     if (!this.gameIsRunning || this.square.value) return;
 
     this.gameService.lastSquarePlayed = this.squareIndex;
-    this.verifyIfBoardIndexIsRunning.emit(this.squareIndex);
     this.square.value = this.gameService.playerTurn;
     this.gameIsRunningEmitter.emit(
       this.gameService.changePlayersTurn(this.board)
     );
+    this.verifyIfBoardIndexIsRunning.emit(this.squareIndex);
     if (!this.board.gameIsRunning) {
       this.board.winner = this.gameService.playerTurn;
     }
